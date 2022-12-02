@@ -2,13 +2,12 @@ def main():
     with open("input.txt", encoding="utf-8") as handler:
         batches = handler.read().split("\n\n")
 
-    highest = 0
+    cals = []
     for batch in batches:
-        batch_cals = sum(int(cal) for cal in batch.split("\n") if cal)
-        if batch_cals > highest:
-            highest = batch_cals
+        cals.append(sum(int(cal) for cal in batch.split("\n") if cal))
 
-    print(highest)
+    cals.sort(reverse=True)
+    print(cals[:3], sum(cals[:3]))
 
 
 if __name__ == "__main__":
