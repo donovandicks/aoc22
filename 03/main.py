@@ -6,11 +6,16 @@ def calc_prior(letter) -> int:
 
 
 def main():
+    i = 1
     priority = 0
     with open("input.txt") as h:
+        group: list[set] = []
         for line in h.readlines():
-            c1, c2 = line[: (len(line) // 2)], line[(len(line) // 2) :]
-            priority += calc_prior(list(set(c1).intersection(c2))[0])
+            group.append(set(line.strip()))
+            if i % 3 == 0:
+                priority += calc_prior(list(set.intersection(*group))[0])
+                group = []
+            i += 1
 
     print(priority)
 
